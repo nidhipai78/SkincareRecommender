@@ -21,6 +21,15 @@ You can use the app instantly without installing anything:
 
 👉 **[Launch Skincare Assistant](https://c84bf28f-d96e-443f-8533-68e89af1d57d-00-36yispy4xic14.sisko.replit.dev/)** on Replit
 
+
+## Run with Docker
+
+docker build -t skincare-recommender .
+
+docker run -p 8501:8501 skincare-recommender
+
+Open http://localhost:8501
+
 ---
 
 ## 🖼️ App Demo
