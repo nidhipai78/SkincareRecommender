@@ -1,4 +1,3 @@
-
 pipeline {
 
     agent any
@@ -17,5 +16,11 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                bat 'docker compose down'
+                bat 'docker compose up -d'
+            }
+        }
     }
 }
