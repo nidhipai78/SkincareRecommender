@@ -1,0 +1,6 @@
+services:
+  skincare-app:
+    build: .
+    image: skincare-recommender
+    ports:
+      - "8501:8501"
