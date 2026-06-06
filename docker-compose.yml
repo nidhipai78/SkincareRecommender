@@ -1,6 +1,6 @@
 services:
   skincare-app:
-    build: .
-    image: skincare-recommender
+    image: nidhinpai/skincare-recommender:1.0
     ports:
       - "8501:8501"
+    restart: always
