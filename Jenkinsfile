@@ -3,7 +3,7 @@ pipeline {
 agent any
 
 environment {
-    DOCKER_IMAGE = "nidhinpai/skincare-recommender:1.0"
+    DOCKER_IMAGE = "nidhinpai/skincarerecommender:1.0"
 }
 
 stages {
@@ -22,7 +22,7 @@ stages {
 
     stage('Push Image to Docker Hub') {
     steps {
-        bat 'docker push nidhinpai/skincare-recommender:1.0'
+        bat 'docker push nidhinpai/skincarerecommender:1.0'
     }
 }
 
