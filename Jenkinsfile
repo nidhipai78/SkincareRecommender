@@ -21,18 +21,10 @@ stages {
     }
 
     stage('Push Image to Docker Hub') {
-        steps {
-            withCredentials([usernamePassword(
-                credentialsId: 'dockerhub',
-                usernameVariable: 'DOCKER_USER',
-                passwordVariable: 'DOCKER_PASS'
-            )]) {
-
-                bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                bat 'docker push %DOCKER_IMAGE%'
-            }
-        }
+    steps {
+        bat 'docker push nidhinpai/skincare-recommender:1.0'
     }
+}
 
     stage('Deploy') {
         steps {
