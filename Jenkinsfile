@@ -1,26 +1,46 @@
 pipeline {
 
-    agent any
+agent any
 
-    stages {
+environment {
+    DOCKER_IMAGE = "nidhinpai/skincare-recommender:1.0"
+}
 
-        stage('Build Docker Image') {
-            steps {
-                bat 'docker build -t skincare-recommender .'
-            }
+stages {
+
+    stage('Build Docker Image') {
+        steps {
+            bat 'docker build -t %DOCKER_IMAGE% .'
         }
+    }
 
-        stage('Validate Docker Compose') {
-            steps {
-                bat 'docker compose config'
-            }
+    stage('Validate Docker Compose') {
+        steps {
+            bat 'docker compose config'
         }
+    }
 
-        stage('Deploy') {
-            steps {
-                bat 'docker compose down'
-                bat 'docker compose up -d'
+    stage('Push Image to Docker Hub') {
+        steps {
+            withCredentials([usernamePassword(
+                credentialsId: 'dockerhub',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_PASS'
+            )]) {
+
+                bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
+                bat 'docker push %DOCKER_IMAGE%'
             }
         }
     }
+
+    stage('Deploy') {
+        steps {
+            bat 'docker compose pull'
+            bat 'docker compose down'
+            bat 'docker compose up -d'
+        }
+    }
+}
+
 }
