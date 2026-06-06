@@ -301,4 +301,3 @@ if name and age:
     )
 
 
-st.title("New")
